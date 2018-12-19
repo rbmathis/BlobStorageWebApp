@@ -1,5 +1,5 @@
 # BlobStorageWebApp 
-A sample web app that serves files from blob storage rather than local storage.
+A sample web app that serves files from blob storage rather than local storage.  You can see this demo working at https://blobstoragewebapp20181219122510.azurewebsites.net/  You'll notice a small jpg on the home page that links to a file that actually doesn't exist on the web app.
 
 ## A solution for reatining links to content that appear local, but are served by blobs. Solves for what? 
   1. Historical content.  Web apps that have allowed file uploads to the local machine will have links (either relative or absolute) that point to a URL that was historically served by a local file, mapped in IIS.  After migration to blob storage, the local content will no longer exist, and all links will be broken. 
@@ -72,3 +72,8 @@ Sure - If. If you don't have any historical data, or if you can change all exist
 		 connectionString="DefaultEndpointsProtocol=https;AccountName={{name}};AccountKey={{key}};EndpointSuffix=core.windows.net" />
 </connectionStrings>
 ```
+Then, just create a file in blob storage under a container named "test".  Then you can access the file via this web app with a call like : https://{url}/Content/Uploads/Images/Bart/5k.jpg.
+
+### Future work
+Solve for caching. Currently the local file system is used as a cache, but it's very naive. redis would be very simple to implement.
+Solve for cleanup. Files are never deleted from local storage. 
