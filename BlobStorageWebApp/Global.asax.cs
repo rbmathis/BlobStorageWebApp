@@ -24,7 +24,7 @@ namespace BlobStorageWebApp
 		protected void Application_BeginRequest(Object sender, EventArgs e)
 		{
 			//check to see if the request is asking for an Uploaded artifact (by checking the path)
-			if (HttpContext.Current.Request.RawUrl.Contains("/Content/Uploads/"))
+			if ((HttpContext.Current.Request.RawUrl.Contains("/Content/Uploads/") && (HttpContext.Current.Request.RequestType=="GET")))
 			{
 				//ex: https://webapplication220181218092344.azurewebsites.net/Content/Uploads/Images/Bart/5k.jpg
 

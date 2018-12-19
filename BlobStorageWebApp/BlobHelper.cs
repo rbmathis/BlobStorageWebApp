@@ -1,6 +1,8 @@
 ﻿using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 using System;
+using System.Collections.Specialized;
+using System.Configuration;
 using System.Diagnostics;
 using System.IO;
 using System.Web;
@@ -198,8 +200,8 @@ namespace BlobStorageWebApp
 		/// <returns></returns>
 		public static CloudBlobClient GetBlobClient()
 		{
-			//todo: put this in config
-			string storageConnectionString = "";
+			string storageConnectionString = ConfigurationManager.ConnectionStrings["BlobStorageConnectionString"].ConnectionString;
+
 			CloudStorageAccount tmp = null;
 
 			//todo: determine if we want to show the actual connection string or not
@@ -213,7 +215,7 @@ namespace BlobStorageWebApp
 			else
 			{
 				//todo: determine if we want to show the actual connection string or not
-				Console.WriteLine($"Your connection string sucks: {storageConnectionString}");
+				Trace.WriteLine($"Your connection string sucks: {storageConnectionString}");
 			}
 
 			return tmp.CreateCloudBlobClient();
